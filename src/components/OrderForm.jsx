@@ -84,7 +84,7 @@ export default function OrderForm() {
     try {
     const response = await axios.post("https://reqres.in/api/pizza", payload, {
       headers: {
-        "x-api-key": "reqres_18bda22631d9441a9d24ab6a24735154", // 401 hatasından dolayı kendi api key'imi alıp kullanmak zorunda kaldım
+        "x-api-key": "reqres-free-v1",
       },
     });
 
