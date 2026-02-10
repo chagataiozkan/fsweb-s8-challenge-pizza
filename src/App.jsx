@@ -1,8 +1,10 @@
 import './App.css'
-import OrderForm from './components/OrderForm';
+import MainPage from './components/MainPage.jsx';
+import OrderForm from './components/OrderForm.jsx';
+import Success from './components/Success.jsx';
 
 function App() {
-  return <OrderForm />;
+  return <MainPage />;
 }
 
 export default App

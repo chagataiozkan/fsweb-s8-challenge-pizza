@@ -1,0 +1,38 @@
+.success-header {
+  min-height: 100vh;
+  background-color: #ce2829;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  margin: 108px 0;
+  aspect-ratio: 16/9;
+}
+
+.header-container img {
+  height: 48px;
+}
+
+.header-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 108px;
+}
+
+.text {
+  font-family: "Roboto Condensed";
+  color: white;
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 300;
+}
+
+/* sadece text elemanına clamp eklenip font-size sayfa boyutune oranla dinamik olarak ayarlandı, bu yüzden iterasyon-1 için media ekranına gerek kalmadı*/
