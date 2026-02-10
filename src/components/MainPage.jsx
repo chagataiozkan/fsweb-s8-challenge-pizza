@@ -1,4 +1,5 @@
 import "./MainPage.css";
+import {Link} from 'react-router-dom';
 
 export default function MainPage() {
   return (
@@ -14,7 +15,9 @@ export default function MainPage() {
               <p className="mp-text-1">fırsatı kaçırma</p>
               <p className="mp-text-2">KOD ACIKTIRIR</p>
               <p className="mp-text-2">PIZZA, DOYURUR</p>
-              <a>ACIKTIM</a>
+              <Link className="mp-cta" to="/order">
+              ACIKTIM
+              </Link>
             </div>
           </div>
         </section>

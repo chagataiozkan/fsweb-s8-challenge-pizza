@@ -10,8 +10,10 @@ import {
 import "./OrderForm.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function OrderForm() {
+
   const [formData, setFormData] = useState({
     userName: "",
     pizzaSize: "",
@@ -62,8 +64,12 @@ export default function OrderForm() {
     }));
   }
 
+
+  const history = useHistory();
+
   async function handleSubmit(event) {
     event.preventDefault();
+
     if (!isValid) return;
 
     const payload = {
@@ -75,14 +81,19 @@ export default function OrderForm() {
       not: formData.orderNote,
     };
 
+    try {
     const response = await axios.post("https://reqres.in/api/pizza", payload, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": "reqres_18bda22631d9441a9d24ab6a24735154", // 401 hatasından dolayı kendi api key'imi alıp kullanmak zorunda kaldım
       },
     });
 
     console.log("Sipariş özeti: ", response.data);
-  }
+
+    history.push("/success");
+  } catch (err) {
+      console.log(err);
+  }}
 
   function increase() {
     setFormData((prev) => ({
