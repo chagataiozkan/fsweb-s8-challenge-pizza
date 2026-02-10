@@ -13,6 +13,22 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function OrderForm() {
+  const ingredients = [
+    { label: "Pepperoni", value: "pepperoni" },
+    { label: "Sosis", value: "sosis" },
+    { label: "Kanada Jambonu", value: "jambon" },
+    { label: "Tavuk Izgara", value: "tavuk" },
+    { label: "Soğan", value: "sogan" },
+    { label: "Domates", value: "domates" },
+    { label: "Mısır", value: "misir" },
+    { label: "Sucuk", value: "sucuk" },
+    { label: "Jalepeno", value: "jalepeno" },
+    { label: "Sarımsak", value: "sarimsak" },
+    { label: "Biber", value: "biber" },
+    { label: "Salam", value: "salam" },
+    { label: "Ananas", value: "ananas" },
+    { label: "Kabak", value: "kabak" },
+  ];
 
   const [formData, setFormData] = useState({
     userName: "",
@@ -64,7 +80,6 @@ export default function OrderForm() {
     }));
   }
 
-
   const history = useHistory();
 
   async function handleSubmit(event) {
@@ -82,18 +97,23 @@ export default function OrderForm() {
     };
 
     try {
-    const response = await axios.post("https://reqres.in/api/pizza", payload, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
+      const response = await axios.post(
+        "https://reqres.in/api/pizza",
+        payload,
+        {
+          headers: {
+            "x-api-key": import.meta.env.VITE_REQRES_API_KEY,
+          },
+        },
+      );
 
-    console.log("Sipariş özeti: ", response.data);
+      console.log("Sipariş özeti: ", response.data);
 
-    history.push("/success");
-  } catch (err) {
+      history.push("/success");
+    } catch (err) {
       console.log(err);
-  }}
+    }
+  }
 
   function increase() {
     setFormData((prev) => ({
@@ -141,9 +161,15 @@ export default function OrderForm() {
     <>
       <header className="header-orderform">
         <div className="header-inner">
-          <img src="images/iteration-1-images/logo.svg" alt="logo" />
+          <img
+            data-cy="logo"
+            src="images/iteration-1-images/logo.svg"
+            alt="logo"
+          />
           <nav className="header-navmenu">
-            <a href="/">Anasayfa</a>
+            <a href="/" data-cy="nav-home">
+              Anasayfa
+            </a>
             <span> - </span>
             <span>Sipariş Oluştur</span>
           </nav>
@@ -179,39 +205,45 @@ export default function OrderForm() {
               <legend>Boyut Seç</legend>
               <FormGroup check>
                 <Input
+                  data-cy="size-kucuk"
                   name="pizzaSize"
                   type="radio"
                   value="kucuk"
+                  id="kucuk"
                   onChange={handleChange}
                   checked={formData.pizzaSize === "kucuk"}
                   invalid={!!errors.pizzaSize}
                 />{" "}
-                <Label check>Küçük</Label>
+                <Label for="kucuk" check>Küçük</Label>
               </FormGroup>
               <FormGroup check>
                 <Input
+                  data-cy="size-orta"
                   name="pizzaSize"
                   type="radio"
                   value="orta"
+                  id="orta"
                   onChange={handleChange}
                   checked={formData.pizzaSize === "orta"}
                   invalid={!!errors.pizzaSize}
                 />{" "}
-                <Label check>Orta</Label>
+                <Label for="orta" check>Orta</Label>
               </FormGroup>
               <FormGroup check>
                 <Input
+                  data-cy="size-buyuk"
                   name="pizzaSize"
                   type="radio"
                   value="buyuk"
+                  id="buyuk"
                   onChange={handleChange}
                   checked={formData.pizzaSize === "buyuk"}
                   invalid={!!errors.pizzaSize}
                 />{" "}
-                <Label check>Büyük</Label>
+                <Label for="buyuk" check>Büyük</Label>
               </FormGroup>
               {errors.pizzaSize && (
-                <FormFeedback className="form-error">
+                <FormFeedback data-cy="error-size" className="form-error">
                   {errors.pizzaSize}
                 </FormFeedback>
               )}
@@ -220,6 +252,7 @@ export default function OrderForm() {
             <FormGroup>
               <Label for="doughSize">Hamur Seç</Label>
               <Input
+                data-cy="dough-select"
                 id="doughSize"
                 name="doughSize"
                 type="select"
@@ -232,7 +265,7 @@ export default function OrderForm() {
                 <option value="ince">İnce</option>
               </Input>
               {errors.doughSize && (
-                <FormFeedback className="form-error">
+                <FormFeedback data-cy="error-dough" className="form-error">
                   {errors.doughSize}
                 </FormFeedback>
               )}
@@ -244,191 +277,29 @@ export default function OrderForm() {
             <p>En az 4, en fazla 10 malzeme seçebilirsiniz. 5₺</p>
           </div>
 
-          <FormGroup className="ingredients-wrapper">
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="pepperoni"
-                id="pepperoni"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("pepperoni")}
-              />
-              <Label check for="pepperoni">
-                Pepperoni
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="sosis"
-                id="sosis"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("sosis")}
-              />
-              <Label check for="sosis">
-                Sosis
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="jambon"
-                id="jambon"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("jambon")}
-              />
-              <Label check for="jambon">
-                Kanada Jambonu
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="tavuk"
-                id="tavuk"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("tavuk")}
-              />
-              <Label check for="tavuk">
-                Tavuk Izgara
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="sogan"
-                id="sogan"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("sogan")}
-              />
-              <Label check for="sogan">
-                Soğan
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="domates"
-                id="domates"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("domates")}
-              />
-              <Label check for="domates">
-                Domates
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="mısır"
-                id="mısır"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("mısır")}
-              />
-              <Label check for="mısır">
-                Mısır
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="sucuk"
-                id="sucuk"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("sucuk")}
-              />
-              <Label check for="sucuk">
-                Sucuk
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="jalepeno"
-                id="jalepeno"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("jalepeno")}
-              />
-              <Label check for="jalepeno">
-                Jalepeno
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="sarımsak"
-                id="sarımsak"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("sarımsak")}
-              />
-              <Label check for="sarımsak">
-                Sarımsak
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="biber"
-                id="biber"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("biber")}
-              />
-              <Label check for="biber">
-                Biber
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="salam"
-                id="salam"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("salam")}
-              />
-              <Label check for="salam">
-                Salam
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="ananas"
-                id="ananas"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("ananas")}
-              />
-              <Label check for="ananas">
-                Ananas
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Input
-                type="checkbox"
-                name="ingredients"
-                value="kabak"
-                id="kabak"
-                onChange={handleIngredients}
-                checked={formData.ingredients.includes("kabak")}
-              />
-              <Label check for="kabak">
-                Kabak
-              </Label>
-            </FormGroup>
+          <FormGroup
+            className="ingredients-wrapper"
+            data-cy="ingredients-group"
+          >
+            {ingredients.map((item) => (
+              <FormGroup check key={item.value}>
+                <Input
+                  data-cy={`ingredient-${item.value}`}
+                  type="checkbox"
+                  name="ingredients"
+                  value={item.value}
+                  id={item.value}
+                  onChange={handleIngredients}
+                  checked={formData.ingredients.includes(item.value)}
+                />
+                <Label check htmlFor={item.value}>
+                  {item.label}
+                </Label>
+              </FormGroup>
+            ))}
+
             {errors.ingredients && (
-              <FormFeedback className="form-error">
+              <FormFeedback data-cy="error-ingredients" className="form-error">
                 {errors.ingredients}
               </FormFeedback>
             )}
@@ -437,6 +308,7 @@ export default function OrderForm() {
           <FormGroup>
             <Label for="userName">İsim</Label>
             <Input
+              data-cy="username-input"
               id="userName"
               name="userName"
               placeholder="İsminizi giriniz"
@@ -445,7 +317,9 @@ export default function OrderForm() {
               value={formData.userName}
               invalid={!!errors.userName}
             />
-            <FormFeedback className="form-error">{errors.userName}</FormFeedback>
+            <FormFeedback className="form-error" data-cy="error-username">
+              {errors.userName}
+            </FormFeedback>
           </FormGroup>
 
           <FormGroup className="order-note-group" row>
@@ -454,6 +328,7 @@ export default function OrderForm() {
             </Label>
             <Col sm={10}>
               <Input
+                data-cy="order-note"
                 id="orderNote"
                 name="orderNote"
                 type="textarea"
@@ -464,12 +339,13 @@ export default function OrderForm() {
             </Col>
           </FormGroup>
 
-            <div className="divider-line" />
+          <div className="divider-line" />
 
           <FormGroup>
             <div className="checkoutWrapper">
               <div className="quantityWrapper">
                 <Button
+                  data-cy="decrease-button"
                   type="button"
                   color="warning"
                   size="lg"
@@ -485,6 +361,7 @@ export default function OrderForm() {
                   min="1"
                 ></Input>
                 <Button
+                  data-cy="increase-button"
                   type="button"
                   color="warning"
                   size="lg"
@@ -503,7 +380,14 @@ export default function OrderForm() {
                   <p>Toplam</p>
                   <p>{totalPrice}</p>
                 </div>
-                <Button className="submit-button" type="submit" color="warning" disabled={!isValid} block>
+                <Button
+                  data-cy="submit-button"
+                  className="submit-button"
+                  type="submit"
+                  color="warning"
+                  disabled={!isValid}
+                  block
+                >
                   SİPARİŞ VER
                 </Button>
               </div>
