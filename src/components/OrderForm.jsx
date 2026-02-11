@@ -11,6 +11,7 @@ import "./OrderForm.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Footer from "./Footer";
 
 export default function OrderForm({ setOrder }) {
   const ingredients = [
@@ -406,6 +407,7 @@ export default function OrderForm({ setOrder }) {
           </FormGroup>
         </Form>
       </main>
+      <Footer />
     </>
   );
 }

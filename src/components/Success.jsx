@@ -46,12 +46,12 @@ export default function Success({ order }) {
             <p className="success-pizza-name">{pizzaName}</p>
             <div className="success-summary">
               <p>
-                Boyut: <span className="success-bold">{sizeLabel}</span>
+                Boyut: <span className="success-bold" data-cy="pizza-size-check">{sizeLabel}</span>
               </p>
               <p>
-                Hamur: <span className="success-bold">{doughLabel}</span>
+                Hamur: <span className="success-bold" data-cy="dough-size-check">{doughLabel}</span>
               </p>
-              <p className="ingredients-line">
+              <p className="ingredients-line" data-cy="ingredients-check">
                 Ek Malzemeler:{" "}
                 <span className="success-bold">
                   {ingredientLabels.join(", ")}
