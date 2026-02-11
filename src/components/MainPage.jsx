@@ -16,7 +16,11 @@ export default function MainPage() {
               <p className="text-1">fırsatı kaçırma</p>
               <p className="text-2">KOD ACIKTIRIR</p>
               <p className="text-2">PIZZA, DOYURUR</p>
-              <Link to="/order" className="mp-cta-link">
+              <Link
+                to="/order"
+                className="mp-cta-link"
+                data-cy="mainpage-button"
+              >
                 ACIKTIM
               </Link>
             </div>
@@ -59,7 +63,7 @@ export default function MainPage() {
           <p>Özel</p>
           <p>Lezzetus</p>
           <p>Position:Absolute Acı Burger</p>
-          <Link to="/order" className="cta-link">
+          <Link to="/order" className="cta-link" data-cy="mainpage-sub-button1">
             SİPARİŞ VER
           </Link>
         </div>
@@ -68,7 +72,7 @@ export default function MainPage() {
             <img src="images/iteration-2-images/cta/kart-2.png" />
             <p>Hackathlon</p>
             <p>Burger Menü</p>
-            <Link to="/order" className="cta-link">
+            <Link to="/order" className="cta-link" data-cy="mainpage-sub-button2">
               SİPARİŞ VER
             </Link>
           </div>
@@ -78,12 +82,12 @@ export default function MainPage() {
               <span style={{ color: "red" }}>Çoooook</span> hızlı
             </p>
             <p>npm gibi kurye</p>
-            <Link to="/order" className="cta-link">
+            <Link to="/order" className="cta-link" data-cy="mainpage-sub-button3">
               SİPARİŞ VER
             </Link>
           </div>
         </div>
-      </section>  
+      </section>
 
       <div className="middle-text">
         <p className="upper-middle-text">en çok paketlenen menüler</p>
@@ -155,7 +159,7 @@ export default function MainPage() {
         </div>
       </section>
 
-    <Footer />
+      <Footer />
     </>
   );
 }

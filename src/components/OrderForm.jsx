@@ -172,17 +172,23 @@ export default function OrderForm({ setOrder }) {
             src="images/iteration-1-images/logo.svg"
             alt="logo"
           />
-          <nav className="header-navmenu">
-            <a href="/" data-cy="nav-home">
-              Anasayfa
-            </a>
-            <span> - </span>
-            <span>Sipariş Oluştur</span>
-          </nav>
         </div>
       </header>
 
       <main>
+        <div className="pizza-hero">
+          <img
+            src="images/iteration-2-images/pictures/form-banner.png"
+            alt="pizza"
+          />
+        </div>
+        <nav className="header-navmenu">
+          <a href="/" data-cy="nav-home">
+            Anasayfa
+          </a>
+          <span> - </span>
+          <span>Sipariş Oluştur</span>
+        </nav>
         <div className="content-wrapper">
           <div className="priced-text">
             <p>Position Absolute Acı Pizza</p>
@@ -221,7 +227,7 @@ export default function OrderForm({ setOrder }) {
                   invalid={!!errors.pizzaSize}
                 />{" "}
                 <Label for="kucuk" check>
-                  Küçük
+                  S
                 </Label>
               </FormGroup>
               <FormGroup check>
@@ -236,7 +242,7 @@ export default function OrderForm({ setOrder }) {
                   invalid={!!errors.pizzaSize}
                 />{" "}
                 <Label for="orta" check>
-                  Orta
+                  M
                 </Label>
               </FormGroup>
               <FormGroup check>
@@ -251,7 +257,7 @@ export default function OrderForm({ setOrder }) {
                   invalid={!!errors.pizzaSize}
                 />{" "}
                 <Label for="buyuk" check>
-                  Büyük
+                  L
                 </Label>
               </FormGroup>
               {errors.pizzaSize && (
@@ -318,7 +324,7 @@ export default function OrderForm({ setOrder }) {
           </FormGroup>
 
           <FormGroup>
-            <Label for="userName">İsim</Label>
+            <Label for="userName" className="ordernote-name-header">İsim</Label>
             <Input
               data-cy="username-input"
               id="userName"
@@ -335,7 +341,7 @@ export default function OrderForm({ setOrder }) {
           </FormGroup>
 
           <FormGroup className="order-note-group" row>
-            <Label for="orderNote" sm={2}>
+            <Label for="orderNote" className="ordernote-name-header" sm={2}>
               Sipariş Notu
             </Label>
             <Col sm={10}>

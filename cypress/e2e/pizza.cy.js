@@ -83,4 +83,24 @@ describe("Pizza Order Form", () => {
     cy.get('[data-cy="dough-size-check"]').should("contain", "İnce");
     cy.get('[data-cy="ingredients-check"]').should("contain", "Pepperoni");
   });
+  it("should handle a successful order", () => {
+    cy.visit("http://localhost:5173/");
+
+    cy.get('[data-cy="mainpage-button"]').click();
+
+    cy.get('[data-cy="username-input"]').type("abcdef");
+
+    cy.get('[data-cy="size-orta"]').click().should("be.checked");
+
+    cy.get('[data-cy="dough-select"]').select("ince");
+
+    cy.get('[data-cy="ingredient-pepperoni"]').check().should("be.checked");
+    cy.get('[data-cy="ingredient-salam"]').check().should("be.checked");
+    cy.get('[data-cy="ingredient-jalepeno"]').check().should("be.checked");
+    cy.get('[data-cy="ingredient-kabak"]').check().should("be.checked");
+
+    cy.get('[data-cy="submit-button"]').should("be.enabled").click();
+
+    cy.url().should("include", "/success");
+  });
 });
