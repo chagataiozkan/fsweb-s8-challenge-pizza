@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-export default function OrderForm() {
+export default function OrderForm({ setOrder }) {
   const ingredients = [
     { label: "Pepperoni", value: "pepperoni" },
     { label: "Sosis", value: "sosis" },
@@ -109,6 +109,11 @@ export default function OrderForm() {
 
       console.log("Sipariş özeti: ", response.data);
 
+      setOrder({
+        ...response.data,
+        secimler: ingredientsPrice * formData.quantity,
+        toplam: totalPrice,
+      });
       history.push("/success");
     } catch (err) {
       console.log(err);
@@ -214,7 +219,9 @@ export default function OrderForm() {
                   checked={formData.pizzaSize === "kucuk"}
                   invalid={!!errors.pizzaSize}
                 />{" "}
-                <Label for="kucuk" check>Küçük</Label>
+                <Label for="kucuk" check>
+                  Küçük
+                </Label>
               </FormGroup>
               <FormGroup check>
                 <Input
@@ -227,7 +234,9 @@ export default function OrderForm() {
                   checked={formData.pizzaSize === "orta"}
                   invalid={!!errors.pizzaSize}
                 />{" "}
-                <Label for="orta" check>Orta</Label>
+                <Label for="orta" check>
+                  Orta
+                </Label>
               </FormGroup>
               <FormGroup check>
                 <Input
@@ -240,7 +249,9 @@ export default function OrderForm() {
                   checked={formData.pizzaSize === "buyuk"}
                   invalid={!!errors.pizzaSize}
                 />{" "}
-                <Label for="buyuk" check>Büyük</Label>
+                <Label for="buyuk" check>
+                  Büyük
+                </Label>
               </FormGroup>
               {errors.pizzaSize && (
                 <FormFeedback data-cy="error-size" className="form-error">

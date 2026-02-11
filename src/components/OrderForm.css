@@ -368,6 +368,13 @@ label[for="doughSize"] {
   color: #ce2829;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 @media (max-width: 768px) {
   .pizza-size-dough-wrapper {
     flex-direction: column;

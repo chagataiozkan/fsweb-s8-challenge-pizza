@@ -4,8 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import MainPage from "./components/MainPage.jsx";
 import OrderForm from "./components/OrderForm.jsx";
 import Success from "./components/Success.jsx";
+import { useState } from "react";
 
 function App() {
+
+  const [order, setOrder] = useState(null);
+
   return (
     <Switch>
       <Route exact path="/">
@@ -13,11 +17,11 @@ function App() {
       </Route>
 
       <Route path="/order">
-        <OrderForm />
+        <OrderForm setOrder={setOrder}/>
       </Route>
 
       <Route path="/success">
-        <Success />
+        <Success order={order}/>
       </Route>
     </Switch>
   );
