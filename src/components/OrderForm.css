@@ -368,21 +368,49 @@ label[for="doughSize"] {
   color: #ce2829;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
+
+  body {
+    min-width: 300px;
+  }
+
   .pizza-size-dough-wrapper {
-    flex-direction: column;
     gap: 14px;
   }
 
   .checkoutWrapper {
     flex-direction: column;
+    gap: 24px;
   }
 
   .totalPriceWrapper {
     width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .order-form .order-note-group.row #orderNote {
+  width: 100%;
+  max-width: 420px;
+}
+
+  .order-form #userName {
+  width: 100%;
+  max-width: 420px;
+}
+
+  .quantityWrapper {
+    margin-left: 20px;
   }
 
   .ingredients-wrapper .form-check {
     width: calc(50% - 12px);
   }
 }
+
