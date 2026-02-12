@@ -6,16 +6,19 @@ describe("Pizza Order Form", () => {
     cy.get('[data-cy="username-input"]').should("be.visible").type("abcdef");
     cy.get('[data-cy="username-input"]').should("have.value", "abcdef");
   });
+
   it("should allow selecting multiple ingredients", () => {
     cy.get('[data-cy="ingredient-pepperoni"]').check().should("be.checked");
     cy.get('[data-cy="ingredient-salam"]').check().should("be.checked");
     cy.get('[data-cy="ingredient-jalepeno"]').check().should("be.checked");
     cy.get('[data-cy="ingredient-kabak"]').check().should("be.checked");
   });
+
   it("should submit the form and navigate to success page", () => {
     cy.get('[data-cy="username-input"]').type("abcdef");
 
-    cy.get('[data-cy="size-orta"]').click().should("be.checked");
+    cy.get('label[for="orta"]').click();
+    cy.get("#orta").should("be.checked");
 
     cy.get('[data-cy="dough-select"]').select("ince");
 
@@ -28,10 +31,12 @@ describe("Pizza Order Form", () => {
 
     cy.url().should("include", "/success");
   });
+
   it("should disable the button when ingredient count is wrong", () => {
     cy.get('[data-cy="username-input"]').type("abcdef");
 
-    cy.get('[data-cy="size-orta"]').click().should("be.checked");
+    cy.get('label[for="orta"]').click();
+    cy.get("#orta").should("be.checked");
 
     cy.get('[data-cy="dough-select"]').select("ince");
 
@@ -41,10 +46,12 @@ describe("Pizza Order Form", () => {
 
     cy.get('[data-cy="submit-button"]').should("be.disabled");
   });
+
   it("should disable the button when dough size is not selected", () => {
     cy.get('[data-cy="username-input"]').type("abcdef");
 
-    cy.get('[data-cy="size-orta"]').click().should("be.checked");
+    cy.get('label[for="orta"]').click();
+    cy.get("#orta").should("be.checked");
 
     cy.get('[data-cy="ingredient-pepperoni"]').check().should("be.checked");
     cy.get('[data-cy="ingredient-salam"]').check().should("be.checked");
@@ -53,6 +60,7 @@ describe("Pizza Order Form", () => {
 
     cy.get('[data-cy="submit-button"]').should("be.disabled");
   });
+
   it("should disable the button when pizza size is not selected", () => {
     cy.get('[data-cy="username-input"]').type("abcdef");
 
@@ -65,10 +73,12 @@ describe("Pizza Order Form", () => {
 
     cy.get('[data-cy="submit-button"]').should("be.disabled");
   });
-    it("should have order details in success page", () => {
+
+  it("should have order details in success page", () => {
     cy.get('[data-cy="username-input"]').type("abcdef");
 
-    cy.get('[data-cy="size-orta"]').click().should("be.checked");
+    cy.get('label[for="orta"]').click();
+    cy.get("#orta").should("be.checked");
 
     cy.get('[data-cy="dough-select"]').select("ince");
 
@@ -83,6 +93,7 @@ describe("Pizza Order Form", () => {
     cy.get('[data-cy="dough-size-check"]').should("contain", "İnce");
     cy.get('[data-cy="ingredients-check"]').should("contain", "Pepperoni");
   });
+
   it("should handle a successful order", () => {
     cy.visit("http://localhost:5173/");
 
@@ -90,7 +101,8 @@ describe("Pizza Order Form", () => {
 
     cy.get('[data-cy="username-input"]').type("abcdef");
 
-    cy.get('[data-cy="size-orta"]').click().should("be.checked");
+    cy.get('label[for="orta"]').click();
+    cy.get("#orta").should("be.checked");
 
     cy.get('[data-cy="dough-select"]').select("ince");
 
